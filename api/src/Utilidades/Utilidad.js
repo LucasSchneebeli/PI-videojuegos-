@@ -7,6 +7,7 @@ function videojuegoUtilidades (videojuego) {
         rating: videojuego.rating,
         plataformas: videojuego.platforms,
         genero: videojuego.genres,
+        imagen: videojuego.background_image
     }
 }
 

@@ -1,0 +1,46 @@
+.boton {
+  background-color: rgb(12, 110, 153);
+  border-radius: 20px;
+  color: white;
+  padding: 25px 45px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 0;
+  cursor: pointer;
+  box-shadow: 5px 8px 12px black;
+  position: absolute;
+  transform: translateX(-50%);
+  bottom: 50%;
+  left: 35%;
+}
+
+
+.boton:hover {
+  background-color: rgb(10, 132, 193);
+  color: white;
+  transition: 0.5s;
+
+}
+
+.imagen {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.container {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.h1 {
+  position: absolute;
+  right: 10px;
+  left: 10px;
+  color: white;
+  top: 2%;
+  font-size: 45px;
+}
