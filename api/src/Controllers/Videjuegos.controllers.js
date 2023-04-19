@@ -77,7 +77,9 @@ const getVideogameByName = async (req, res) => {
             },
             includes: Genre
         })
-        if (videojuegoDB) primerosJuegos = [...videojuegoDB]
+        if (videojuegoDB) {
+            juegosBuscados = [...videojuegoDB]
+        }
 
     } catch (error) {
 
@@ -88,7 +90,7 @@ const getVideogameByName = async (req, res) => {
     try {
 
         let apiUrl = await axios.get(`https://api.rawg.io/api/games?key=${process.env.YOUR_API_KEY}&search=${name}`)
-        const primerosJuegos = api?.data.reuslts
+        let primerosJuegos = apiUrl?.data?.results
 
         primerosJuegos.forEach(juego => {
             if (juego.name.toLowerCase().includes(name.toLowerCase())) {
@@ -98,13 +100,12 @@ const getVideogameByName = async (req, res) => {
         })
 
 
-        apiUrl = api.data.next
-
+        res.status(200).json(juegosBuscados.slice(0, 15));
 
     } catch (error) {
         res.status(404).json({ message: 'No se encontro el videojuego', error })
     }
-    res.status(200).json(juegosBuscados.slice(0, 15));
+    
 
 }
 

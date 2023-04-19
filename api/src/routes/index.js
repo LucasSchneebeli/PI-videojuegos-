@@ -20,7 +20,7 @@ if (req.query.name) {
 
 router.get('/videogames/:idVideogames', getVideogameById);
 
-router.get('videogames/name', getVideogameByName);
+// router.get('videogames/name', getVideogameByName);
 
 router.post('/videogames', CreandoVideojuego);
 

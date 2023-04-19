@@ -1,0 +1,31 @@
+.juego {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e0f2ff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  padding: 1rem;
+  width: 100%;
+  text-decoration: none;
+}
+
+.juego:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+h1,
+h2 {
+  font-family: 'Arial', sans-serif;
+  color: #004c8c;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
