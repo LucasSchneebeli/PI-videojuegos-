@@ -39,7 +39,7 @@ const getVideogameById = async (req, res) => {
 
 
     try {
-        const videojuegoDB = await Videogame.findbyPk(id, {includes: Genre})
+        const videojuegoDB = await Videogame.findByPk(id, {includes: Genre})
         if (videojuegoDB) { return res.status(200).json(videjuegoDB) }
 
     } catch (error) {

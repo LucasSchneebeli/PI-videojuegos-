@@ -18,7 +18,7 @@ if (req.query.name) {
 
 
 
-router.get('/videogames/:idVideogames', getVideogameById);
+router.get('/videogames/:id', getVideogameById);
 
 // router.get('videogames/name', getVideogameByName);
 

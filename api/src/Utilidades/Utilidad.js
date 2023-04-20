@@ -6,7 +6,7 @@ function videojuegoUtilidades (videojuego) {
         lanzamiento: videojuego.released,
         rating: videojuego.rating,
         plataformas: videojuego.platforms,
-        genero: videojuego.genres,
+        generos: videojuego.genres,
         imagen: videojuego.background_image
     }
 }
