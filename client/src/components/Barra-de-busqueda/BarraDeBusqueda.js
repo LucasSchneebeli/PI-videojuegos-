@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 
 
 
+
 export default function BarraDeBusqueda() {
 const [juego, setJuego] = useState('')
 const [resultado, setResultado] = useState([]);
@@ -35,12 +36,13 @@ const handleChange = (e) => {
 
 
   return (
-    <div className='container'>
+    <div className={styles.container} >
+       <div className={styles.searchContainer}>
         <input type='text' placeholder='Buscar juego' value={juego} onChange={handleChange}></input>
         <button onClick={handleResultado}>Buscar</button>
         <button onClick={handleCrearJuego}>Crear Juego</button>
-     
-        
+        </div>
+        <div className={styles.resultsContainer}>
         {resultado && resultado.map(j => 
           <Juego 
           key={j.id}
@@ -49,7 +51,8 @@ const handleChange = (e) => {
           imagen={j.imagen}
           generos={j.generos}
           />)}
-       
+       </div>
+ 
       </div>
 
   )

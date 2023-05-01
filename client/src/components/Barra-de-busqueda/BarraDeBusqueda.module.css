@@ -1,84 +1,70 @@
-
-.BarraDeBusqueda {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  margin: 0 2rem 2rem 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.resultContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Arial', sans-serif;
-  padding: 2rem;
-  background-color: #0f172a;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 2rem 2rem 2rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #f2f2f2;
 }
 
-.input-buttons-wrapper {
+.searchContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   margin-bottom: 1rem;
+
 }
 
-.search-input {
-  width: 50%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  background-color: #1e293b;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  outline: none;
-}
-
-.search-input::placeholder {
-  color: #94a3b8;
-}
-
-button {
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  background-color: #2563eb;
-  border: none;
-  border-radius: 5px;
-  color: #ffffff;
-  cursor: pointer;
-  margin-left: 1rem;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+.input {
   flex-grow: 1;
+  margin-right: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+ 
 }
 
-button:last-child {
-  margin-left: 1rem;
+.button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
-button:hover {
-  background-color: #3b82f6;
+.button:hover {
+  background-color: #45a049;
 }
 
-@media screen and (max-width: 768px) {
-  .barraDeBusqueda {
-    padding: 1.5rem;
-  }
-
-  .input-buttons-wrapper {
+@media (max-width: 768px) {
+  .container {
     flex-direction: column;
+    align-items: flex-end;
   }
 
-  .search-input {
-    width: 100%;
+  .input {
     margin-bottom: 1rem;
+    margin-right: 0;
   }
 
-  button {
-    width: 100%;
-    margin-left: 0;
-    margin-bottom: 1rem;
-  }
-
-  button:last-child {
-    margin-bottom: 0;
+  .button {
+    margin: 0.5rem 0;
   }
 }

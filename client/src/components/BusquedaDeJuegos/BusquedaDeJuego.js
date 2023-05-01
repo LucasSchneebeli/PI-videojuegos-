@@ -9,6 +9,7 @@ import styles from './BusquedaDeJuego.module.css'
 
 export default function BusquedaDeJuego() {
 
+
   const dispatch = useDispatch();
 
   const [selectedOption, setSelectedOption] = useState('');
@@ -61,22 +62,23 @@ export default function BusquedaDeJuego() {
   return (
     <div className={styles.container}>
       <h3>Buscar juego segun:</h3>
-      <div className={styles.formGroup}>
+      
 
 
-
+       <div>
         <label htmlFor='dropdown'>API o BASE DE DATOS</label>
-        <select value={selectedOption} onChange={handleSelect}>
+        <select value={selectedOption} onChange={handleSelect} className={styles.selectSize}>
           <option value="Elegir una opcion">--Elegir una opcion--</option>
           <option value="API">API</option>
           <option value="Base de Datos">Base de Datos</option>
           <option value='Ambos'>Ambos</option>
         </select>
-      </div>
+        </div>
+     
 
       <div>
         <label htmlFor='dropdown'>Género</label>
-        <select onChange={handleGenre} >
+        <select onChange={handleGenre} className={styles.selectSize} >
           <option value="Elegir">--Elegir una opcion--</option>
           {generosDisponibles.map((g) => (
             <option key={g} value={g}>
@@ -88,7 +90,7 @@ export default function BusquedaDeJuego() {
 
       <div>
         <label htmlFor='dropdown'>Alfabeticamente</label>
-        <select value={options} onChange={handleOpciones}>
+        <select value={options} onChange={handleOpciones} className={styles.selectSize}>
           <option value="Elgir una opcion">--Elegir una opcion--</option>
           <option value="A-Z">A-Z</option>
           <option value="Z-A">Z-A</option>
@@ -97,7 +99,7 @@ export default function BusquedaDeJuego() {
 
       <div>
         <label htmlFor='dropdown'>Rating</label>
-        <select value={rating} onChange={handleRating}>
+        <select value={rating} onChange={handleRating} className={styles.selectSize}>
           <option value="">--Elegir una opcion--</option>
           <option value="Ascendentemente">Ascendentemente</option>
           <option value="Descendentemente">Descendentemente</option>

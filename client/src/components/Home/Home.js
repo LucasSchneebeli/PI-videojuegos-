@@ -13,6 +13,7 @@ import styles from './Home.module.css'
 
 
 
+
 export default function Home() {
 
   const dispatch = useDispatch();
@@ -28,6 +29,8 @@ export default function Home() {
         dispatch(TomarJuegos(res))
         
       })
+
+   
   }
 
   return (
@@ -38,7 +41,7 @@ export default function Home() {
 
       <div>
         
-        <BarraDeBusqueda/>
+        <BarraDeBusqueda />
         <BusquedaDeJuego/>
         <Juegos />
       </div>

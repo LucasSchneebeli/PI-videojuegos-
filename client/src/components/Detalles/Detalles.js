@@ -58,7 +58,7 @@ export default function Detalles() {
 
 
   return (
-    <div classname={styles.container}>
+    <div className={styles.container}>
       {detalles ? (
         <>
           <h1>{detalles.nombre}</h1>
