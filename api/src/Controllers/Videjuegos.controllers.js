@@ -8,6 +8,8 @@ const { videojuegoUtilidades } = require('../Utilidades/Utilidad.js')
 
 const getVideogames = async (req, res) => {
 
+
+
     let resultadoAPI = []
     const api = await axios.get(`https://api.rawg.io/api/games?key=${process.env.YOUR_API_KEY}`)
     const api2 = api?.data.next ? await axios.get(api.data.next) : null
@@ -21,11 +23,12 @@ const getVideogames = async (req, res) => {
 
     resultadoAPI = resultadoAPI.map(videojuegoUtilidades)
 
-    const videjuegoDB = await Videogame.findAll({
+    const videojuegoDB = await Videogame.findAll({
         include: Genre
     })
+ 
 
-    let resultado = [...resultadoAPI, ...videjuegoDB]
+    let resultado = [...resultadoAPI, ...videojuegoDB]
     res.status(200).json(resultado)
 
 }
@@ -39,8 +42,8 @@ const getVideogameById = async (req, res) => {
 
 
     try {
-        const videojuegoDB = await Videogame.findByPk(id, {includes: Genre})
-        if (videojuegoDB) { return res.status(200).json(videjuegoDB) }
+        const videojuegoDB = await Videogame.findByPk(id, {include: Genre})
+        if (videojuegoDB) { return res.status(200).json(videojuegoDB) }
 
     } catch (error) {
 
@@ -75,7 +78,7 @@ const getVideogameByName = async (req, res) => {
                     [Op.iLike]: `%${name}%`
                 }
             },
-            includes: Genre
+            include: Genre,
         })
         if (videojuegoDB) {
             juegosBuscados = [...videojuegoDB]
@@ -123,17 +126,17 @@ const CreandoVideojuego = async (req, res) => {
 
         if (generos.length > 0) {
             await Promise.all(generos.map(async (genero) => {
-                const g = Genre.findOrCreate({
+                const g = await Genre.findOrCreate({
                     where: {
-                        nombre: genero
+                        name: genero
                     }
                 })
-                await videojuegoCreado.addGenres(g[0])
+                await videojuegoCreado.addGenre(g[0])
             }))
         }
 
         const videojuegoConGenero = await Videogame.findByPk(videojuegoCreado.id, {
-            include: Genre,
+            include: Genre
         })
 
 
@@ -153,7 +156,7 @@ const LlamandoGeneros = async (req, res) => {
     await generos.data.results.map(genero => {
          Genre.findOrCreate({
             where: {
-                nombre: genero.name
+                name: genero.name
             }
         })
     })

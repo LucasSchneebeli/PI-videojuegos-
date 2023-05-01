@@ -1,11 +1,12 @@
-import { ORDENAR_POR_NOMBRE, ORDENAR_POR_RATING, FILTRAR_API_O_BASEDEDATOS, TOMAR_JUEGOS, NUEVO_ESTADO } from './actions'
+import { ORDENAR_POR_NOMBRE, ORDENAR_POR_RATING, TOMAR_JUEGOS, NUEVO_ESTADO, FILTER_GENERO } from './actions'
 
 
 const initialState = {
     videojuegos: [],
     videojuegosFiltrados: [],
     selectedOption: 'Ambos',
-    ordenOption:  ''
+    ordenOption: '',
+    videojuegosGenero: 'Elegir'
 }
 export const rootReducer = (state = initialState, action) => {
 
@@ -15,30 +16,30 @@ export const rootReducer = (state = initialState, action) => {
                 videojuegos: action.payload
             }
         case ORDENAR_POR_NOMBRE:
-            if (action.payload === 'A-Z'){
+            if (action.payload === 'A-Z') {
                 return {
                     ...state,
                     videojuegos: [...state.videojuegos].sort((a, b) => a.nombre > b.nombre ? 1 : -1),
                     ordenOption: 'A-Z'
-                } 
-            } else if (action.payload === 'Z-A'){
-                    return {
-                        ...state,
-                        videojuegos: [...state.videojuegos].sort((a, b) => a.nombre < b.nombre ? 1 : -1),
-                        ordenOption: 'Z-A'
+                }
+            } else if (action.payload === 'Z-A') {
+                return {
+                    ...state,
+                    videojuegos: [...state.videojuegos].sort((a, b) => a.nombre < b.nombre ? 1 : -1),
+                    ordenOption: 'Z-A'
 
-                    }
+                }
             }
             return state;
 
-       case ORDENAR_POR_RATING:
-            if (action.payload === 'Ascendentemente'){
+        case ORDENAR_POR_RATING:
+            if (action.payload === 'Ascendentemente') {
                 return {
                     ...state,
                     videojuegos: [...state.videojuegos].sort((a, b) => a.rating > b.rating ? 1 : -1),
                     ordenOption: 'Ascendentemente'
                 }
-            } else if (action.payload === 'Descendentemente'){
+            } else if (action.payload === 'Descendentemente') {
                 return {
                     ...state,
                     videojuegos: [...state.videojuegos].sort((a, b) => a.rating < b.rating ? 1 : -1),
@@ -46,29 +47,19 @@ export const rootReducer = (state = initialState, action) => {
                 }
             }
 
-    //     case FILTRAR_API_O_BASEDEDATOS:
-    //         if (action.payload === 'Ambos'){
-    //         return {
-    //             ...state.videojuegosFiltrados  
-    //         } }  else if (action.payload === 'API'){
-    //             return {
-    //                 ...state, videojuegosFiltrados: state.videojuegos.filter(juego => juego.id.length < 5)
-    //         }
-               
-    //     } else if (action.payload === 'Base de Datos'){
-    //         return {
-    //             ...state, videojuegosFiltrados: state.videojuegos.filter(juego => juego.id.length > 7)
-    //     }
-    // }
+        case FILTER_GENERO:
+            return {
+                ...state,
+                videojuegosGenero: action.payload
+            }
 
-    case NUEVO_ESTADO: 
-        return {...state, 
-            selectedOption: action.payload
-        }
+        case NUEVO_ESTADO:
+            return {
+                ...state,
+                selectedOption: action.payload
+            }
 
-
-            
-        default: 
+        default:
             return state;
     }
 }

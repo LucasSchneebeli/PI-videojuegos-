@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Paginado.module.css';
 
 
 function Paginado({ totalJuegos, juegosPorPagina, paginaActual, onPageChange }) {
@@ -9,7 +10,7 @@ function Paginado({ totalJuegos, juegosPorPagina, paginaActual, onPageChange }) 
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {Array.from({ length: numeroDePaginas }, (_, index) => (
         <button
           key={index}

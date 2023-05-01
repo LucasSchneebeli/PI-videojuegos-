@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import styles from './Detalles.module.css';
 
 
 function stripHTMLTags(str) {
@@ -42,24 +44,44 @@ export default function Detalles() {
 
   const strippedDescription = detalles && detalles.descripcion ? stripHTMLTags(detalles.descripcion) : '';
 
+
+    let plataformas;
+    let generos;
+
+    if (id.length < 10) {
+      plataformas = detalles?.plataformas?.map((plataforma => plataforma.platform.name)).join(', ');
+      generos = detalles?.generos?.map(genero => genero.name).join(', ');
+    } else {
+      plataformas = detalles?.plataformas.join(', ')
+      generos = detalles?.genres?.map(genero => genero.name).join(', ')
+    }
+
+
   return (
-    <div>
+    <div classname={styles.container}>
       {detalles ? (
         <>
           <h1>{detalles.nombre}</h1>
           <img src={detalles.imagen} alt={detalles.nombre} />
-          <h2>{generosString}</h2>
-          <p>{strippedDescription}</p>
+          <p>Descripción: {strippedDescription}</p>
           <p>Rating: {detalles.rating}</p>
+          <p>ID: {id}</p>
+          <p>Fecha de lanzamiento: {detalles.lanzamiento}</p>
           <p>Plataformas:{' '}
+        
   {detalles.plataformas &&
     detalles.plataformas.map((plataforma, index) => (
       <span key={index}>
-        {plataforma.platform.name}
-        {index < detalles.plataformas.length - 1 ? ', ' : ''}
+        {plataformas}
       </span>
     ))}
 </p>
+
+<p>Generos: {generos}</p>
+
+<Link to="/home" className={styles.volverBoton}>Regresar al inicio</Link> 
+       
+
         </>
       ) : (
         <p>Cargando detalles...</p>

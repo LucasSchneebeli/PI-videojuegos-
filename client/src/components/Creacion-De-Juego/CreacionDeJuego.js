@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import styles from './CreacionDeJuego.module.css';
-
-
+import { useNavigate } from 'react-router-dom';
 
 
 function Creacion() {
@@ -11,11 +10,11 @@ function Creacion() {
       imagen: '',
       descripcion: '',
       plataformas: [],
-      fechaLanzamiento: '',
+      lanzamiento: '',
       rating: '',
       generos: []
     });
-    console.log(formValues)
+    // console.log(formValues)
 
     const [generosDisponibles, setGenerosDisponibles] = useState([]);
 
@@ -45,31 +44,34 @@ function Creacion() {
     };
   
     const handleGeneroChange = (e) => {
-      const { value } = e.target;
-      const generos = formValues.generos.includes(value)
-        ? formValues.generos.filter((g) => g !== value)
-        : [...formValues.generos, value];
-      setFormValues({ ...formValues, generos });
+      // const { value } = e.target;
+      // const generos = formValues.generos.includes(value)
+      //   ? formValues.generos.filter((g) => g !== value)
+      //   : [...formValues.generos, value];
+      // setFormValues({ ...formValues, generos });
+
+
+      const value = e.target.options;
+      const generosElegidos = [];
+      for (let i = 0; i < value.length; i++) {
+        if (value[i].selected) {
+          generosElegidos.push(value[i].value);
+        }
+      }
+      setFormValues({ ...formValues, generos: [...generosElegidos] });
+
     };
 
-    // const handleEnviar = (e) => {
-    //   e.preventDefault();
-    //   fetch ('http://localhost:3001/videogames', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(formValues)
-    // })
-    // .then(res => res.json())
-    // .then(data => {
-    //   console.log(data)
-    // })
-    // .catch(err => console.log(err))
-    // }
+    const navigate = useNavigate();
+
+    const handleVolver = () => {
+      navigate('/home');
+    };
   
     const handleSubmit = (e) => {
       e.preventDefault();
+
+   
   
       // Agrega tus validaciones aquí
       if (!formValues.nombre.match(/^[a-zA-Z0-9 ]+$/)) {
@@ -91,8 +93,8 @@ function Creacion() {
         },
         body: JSON.stringify(formValues)
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
+    .then((res) => res.json())
+    .then((data) => console.log(data))
     .then(alert('Videojuego creado con éxito'))
     .catch(err => console.log(err))
     };
@@ -123,7 +125,7 @@ function Creacion() {
           <br />
           <label>
             Fecha de lanzamiento:
-            <input type="date" name="fechaLanzamiento" value={formValues.fechaLanzamiento} onChange={handleChange} />
+            <input type="text" name="lanzamiento" value={formValues.lanzamiento} onChange={handleChange} />
           </label>
           <br />
           <label>
@@ -133,10 +135,10 @@ function Creacion() {
           <br />
           <label>
             Géneros:
-            <select multiple onChange={handleGeneroChange}>
-            {generosDisponibles.map((genero) => (
-              <option key={genero.id} value={genero.nombre}>
-                {genero.nombre}
+            <select multiple name="generos" onChange={handleGeneroChange}>
+            {generosDisponibles?.map((genero) => (
+              <option key={genero.id} value={genero.name}>
+                {genero.name}
               </option>
             ))}
             </select>
@@ -144,6 +146,7 @@ function Creacion() {
           <br />
 
             <button type="submit">Crear videojuego</button>
+            <button onClick={handleVolver}>Volver</button>
 
         </form>
         </div>

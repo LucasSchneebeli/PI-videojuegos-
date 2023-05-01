@@ -2,6 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import Juego from '../Juego/Juego'
+import styles from './BarraDeBusqueda.module.css'
+import { useNavigate } from 'react-router-dom'
+
 
 
 
@@ -24,14 +27,24 @@ const handleChange = (e) => {
     } 
   }
 
+  const navigate = useNavigate();
+
+  const handleCrearJuego = () => {
+    navigate('/videogames/create')
+  };
+
 
   return (
-    <div>
+    <div className='container'>
         <input type='text' placeholder='Buscar juego' value={juego} onChange={handleChange}></input>
         <button onClick={handleResultado}>Buscar</button>
+        <button onClick={handleCrearJuego}>Crear Juego</button>
+     
+        
         {resultado && resultado.map(j => 
           <Juego 
           key={j.id}
+          id={j.id}
           nombre={j.nombre}
           imagen={j.imagen}
           generos={j.generos}

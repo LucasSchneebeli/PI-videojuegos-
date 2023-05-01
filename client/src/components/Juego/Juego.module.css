@@ -2,30 +2,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #e0f2ff;
+  background-color: #2c3e50;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
   padding: 1rem;
-  width: 100%;
+  width: 90%;
   text-decoration: none;
+  box-sizing: border-box;
 }
 
 .juego:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-h1,
-h2 {
+.juego h1,
+.juego h2 {
   font-family: 'Arial', sans-serif;
-  color: #004c8c;
+  color: #ecf0f1;
   margin: 0;
   margin-bottom: 0.5rem;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+.juego img {
+  width: 250px;
+  height: 140px;
   border-radius: 5px;
   margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+.juego h1 {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.juego h2 {
+  font-size: clamp(0.7rem, 1vw, 1rem);
+  max-width: 100%;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .juego img {
+    width: 200px;
+    height: 112px;
+  }
 }

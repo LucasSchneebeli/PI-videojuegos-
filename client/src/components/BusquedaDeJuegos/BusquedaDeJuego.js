@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
-import { FilterAPIoDB, FilterOrdenNombre, FilterRating, NuevoEstado } from '../../redux/actions'
+import { useState, useEffect } from 'react'
+import { FilterAPIoDB, FilterOrdenNombre, FilterRating, NuevoEstado, FilterGenero } from '../../redux/actions'
 import { useDispatch } from 'react-redux';
 import styles from './BusquedaDeJuego.module.css'
 
@@ -31,13 +31,39 @@ export default function BusquedaDeJuego() {
     dispatch(FilterRating(event.target.value))
   };
 
-// console.log(selectedOption, options, rating)
+  const handleGenre = (event) => {
+    dispatch(FilterGenero(event.target.value))
+  };
+
+  const [generosDisponibles, setGenerosDisponibles] = useState([]);
+
+  useEffect(() => {
+
+    dispatch(FilterGenero('Elegir'))
+
+    const fetchGeneros = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/genres');
+        const data = await response.json();
+        const nombres = data.map((g) => g.name);
+        setGenerosDisponibles(nombres);
+      } catch (error) {
+        console.error('Error al obtener géneros:', error);
+      }
+    };
+
+    fetchGeneros();
+  }, []);
+
+  console.log("Generos", generosDisponibles)
+
 
   return (
     <div className={styles.container}>
+      <h3>Buscar juego segun:</h3>
       <div className={styles.formGroup}>
 
-        <h3>Buscar juego segun:</h3>
+
 
         <label htmlFor='dropdown'>API o BASE DE DATOS</label>
         <select value={selectedOption} onChange={handleSelect}>
@@ -45,6 +71,18 @@ export default function BusquedaDeJuego() {
           <option value="API">API</option>
           <option value="Base de Datos">Base de Datos</option>
           <option value='Ambos'>Ambos</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor='dropdown'>Género</label>
+        <select onChange={handleGenre} >
+          <option value="Elegir">--Elegir una opcion--</option>
+          {generosDisponibles.map((g) => (
+            <option key={g} value={g}>
+              {g}
+            </option>
+          ))}
         </select>
       </div>
 
@@ -65,11 +103,10 @@ export default function BusquedaDeJuego() {
           <option value="Descendentemente">Descendentemente</option>
         </select>
       </div>
+
+
+
     </div>
-
-
-
 
   )
 }
-
